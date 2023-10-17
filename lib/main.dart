@@ -8,20 +8,33 @@ import 'package:firebase_auth/firebase_auth.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final RxBool isDarkmode = false.obs;
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: LoginPage(),
-    );
+    return Obx(() => GetMaterialApp(
+        title: 'My App',
+        theme: isDarkmode.value ? ThemeData.dark() : ThemeData.light(),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('login'),
+            actions: [
+              IconButton(
+                icon:
+                    Icon(isDarkmode.value ? Icons.light_mode : Icons.dark_mode),
+                onPressed: () {
+                  isDarkmode.toggle();
+                },
+              ),
+            ],
+          ),
+          body: LoginPage(),
+        )));
   }
 }

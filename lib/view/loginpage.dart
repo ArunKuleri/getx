@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/user.dart';
 import 'package:get/get.dart';
@@ -7,12 +9,10 @@ class LoginPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final RxBool showSignupForm = false.obs;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login Page"),
-      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
               showSignupForm.toggle();
             }, child: Obx(() {
               return Text(showSignupForm.value
-                  ? 'I already Have an account'
+                  ? 'I already Have an account?'
                   : "Create An Account");
             }))
           ],
