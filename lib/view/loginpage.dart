@@ -65,29 +65,20 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                   height: 16.0,
                 ),
-                Obx(() {
-                  return showSignupForm.value
-                      ? ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              userController.signInWithEmailAndPassword(
-                                emailController.text,
-                                passwordController.text,
-                              );
-                              Get.to(() => Dashboard());
-                            }
-                          },
-                          child: Text("Sign Up"),
-                        )
-                      : ElevatedButton(
-                          onPressed: () {
-                            userController.signInWithEmailAndPassword(
-                                emailController.text, passwordController.text);
-                            Get.to(() => Dashboard());
-                          },
-                          child: Text("sign in"),
-                        );
-                }),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      userController.signInWithEmailAndPassword(
+                        emailController.text,
+                        passwordController.text,
+                      );
+                      Get.to(() => Dashboard());
+                    }
+                  },
+                  child: Obx(() {
+                    return Text(showSignupForm.value ? "Sign Up" : "Sign In");
+                  }),
+                ),
                 SizedBox(
                   height: 8.0,
                 ),
