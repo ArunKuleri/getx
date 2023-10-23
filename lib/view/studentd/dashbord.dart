@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/sidebarcontroller.dart';
 import 'package:flutter_application_1/view/loginpage.dart';
+import 'package:flutter_application_1/view/todo/todo.dart';
 import 'package:get/get.dart';
 
 class Dashboard extends StatelessWidget {
@@ -65,7 +66,9 @@ class Dashboard extends StatelessWidget {
                     child: ListTile(
                       leading: Icon(Icons.assignment),
                       title: Text("Task"),
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(TodoPage());
+                      },
                     ),
                   ),
                 ),

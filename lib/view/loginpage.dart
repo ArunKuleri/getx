@@ -29,40 +29,40 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Welcome!!",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36),
                 ),
-                Icon(
+                const Icon(
                   Icons.people,
                   size: 150,
                 ),
                 TextFormField(
                   controller: emailController,
                   validator: _validateEmail,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Email",
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16.0,
                 ),
                 TextFormField(
                   controller: passwordController,
                   validator: _validatePassword,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "password",
                   ),
                   obscureText: true,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16.0,
                 ),
                 ElevatedButton(
@@ -79,7 +79,7 @@ class LoginPage extends StatelessWidget {
                     return Text(showSignupForm.value ? "Sign Up" : "Sign In");
                   }),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8.0,
                 ),
                 TextButton(onPressed: () {
