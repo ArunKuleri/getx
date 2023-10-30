@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/user.dart';
 import 'package:flutter_application_1/view/studentd/dashbord.dart';
+import 'package:flutter_application_1/view/studentd/otppage.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
@@ -88,7 +89,24 @@ class LoginPage extends StatelessWidget {
                   return Text(showSignupForm.value
                       ? 'I already Have an account?'
                       : "Create An Account");
-                }))
+                })),
+                SizedBox(
+                  height: 10,
+                ),
+                Text("OR"),
+                SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(otp());
+                  },
+                  child: Text('Sign in with OTP'),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                ),
               ],
             ),
           ),
