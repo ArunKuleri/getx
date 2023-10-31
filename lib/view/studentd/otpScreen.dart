@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/otp/otp_controller.dart';
 import 'package:flutter_application_1/widgets/custombutton.dart';
-import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -93,7 +91,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         child: CustomButton(
                             onPressed: () {
                               if (otpCode != null) {
-                                verifyOtp(otpCode!);
+                                verifyOtp(context, otpCode!);
                               } else {
                                 SnackBar(
                                   content: Text("enter 6 digit code"),
@@ -113,9 +111,5 @@ class _OtpScreenState extends State<OtpScreen> {
                     ]))))));
   }
 
-  verifyOtp(String userOtp) {
-    final ap = Get.find<OtpController>();
-  ap.verifyOtp(context:Get.context!, verificaionId: widget.verificationId, UserOtp: userOtp, onSuccess: (){ap.checkExistingUser().then((Value)async{if(Value==true){
-    await ap.getDataFromFirestore
-  }})})}
+  verifyOtp(BuildContext context, String userOtp) {}
 }
