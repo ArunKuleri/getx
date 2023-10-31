@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/toggle_controller.dart';
 import 'package:flutter_application_1/controller/user.dart';
 import 'package:flutter_application_1/services/google.dart';
 import 'package:flutter_application_1/view/studentd/dashbord.dart';
@@ -30,7 +31,24 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(DarkModeController());
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Obx(
+            () => IconButton(
+              onPressed: () {
+                Get.changeThemeMode(controller.changeTheme());
+              },
+              icon: Icon(
+                controller.themeMode.value == ThemeMode.light
+                    ? Icons.dark_mode
+                    : Icons.light_mode,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: SingleChildScrollView(

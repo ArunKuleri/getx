@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/sidebarcontroller.dart';
+import 'package:flutter_application_1/services/google.dart';
 import 'package:flutter_application_1/view/addStudent/addstudent.dart';
 import 'package:flutter_application_1/view/loginpage.dart';
 import 'package:flutter_application_1/view/todo/todo.dart';
@@ -12,7 +13,7 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             leading: Icon(Icons.account_box_sharp),
             title: Text("D A S H B O A R D"),
             expandedHeight: 300,
@@ -27,12 +28,12 @@ class Dashboard extends StatelessWidget {
                       height: 150,
                       width: 150,
                       child: ListTile(
-                        leading: Icon(
+                        leading: const Icon(
                           Icons.person,
                         ),
-                        title: Text("Add Student "),
+                        title: const Text("Add Student "),
                         onTap: () {
-                          Get.to(AddStudent());
+                          Get.to(const AddStudent());
                         },
                       ),
                     ),
@@ -49,8 +50,8 @@ class Dashboard extends StatelessWidget {
                   height: 150,
                   width: 150,
                   child: ListTile(
-                    leading: Icon(Icons.calendar_today),
-                    title: Text("Attandence"),
+                    leading: const Icon(Icons.calendar_today),
+                    title: const Text("Attandence"),
                     onTap: () {},
                   ),
                 )),
@@ -67,8 +68,8 @@ class Dashboard extends StatelessWidget {
                     height: 150,
                     width: 150,
                     child: ListTile(
-                      leading: Icon(Icons.assignment),
-                      title: Text("Task"),
+                      leading: const Icon(Icons.assignment),
+                      title: const Text("Task"),
                       onTap: () {
                         Get.to(TodoPage());
                       },
@@ -88,8 +89,8 @@ class Dashboard extends StatelessWidget {
                     height: 150,
                     width: 150,
                     child: ListTile(
-                      leading: Icon(Icons.assignment_turned_in),
-                      title: Text("Assignments"),
+                      leading: const Icon(Icons.assignment_turned_in),
+                      title: const Text("Assignments"),
                       onTap: () {},
                     ),
                   ),
@@ -107,8 +108,8 @@ class Dashboard extends StatelessWidget {
                     height: 150,
                     width: 150,
                     child: ListTile(
-                      leading: Icon(Icons.attach_money),
-                      title: Text(
+                      leading: const Icon(Icons.attach_money),
+                      title: const Text(
                         "Fees",
                       ),
                       onTap: () {},
@@ -123,21 +124,22 @@ class Dashboard extends StatelessWidget {
       endDrawer: GetBuilder<SidebarController>(
         builder: (controller) => Drawer(
           child: ListView(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
             children: [
-              DrawerHeader(
+              const DrawerHeader(
                 child: Text("Sidebar"),
               ),
               ListTile(
-                leading: Icon(Icons.logout),
-                title: Text("Log Out"),
-                onTap: () {
+                leading: const Icon(Icons.logout),
+                title: const Text("Log Out"),
+                onTap: () async {
+                  await FirebaseServices().signOut();
                   Get.to(LoginPage());
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Settings'),
+                leading: const Icon(Icons.settings),
+                title: const Text('Settings'),
                 onTap: () {},
               ),
             ],

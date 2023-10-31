@@ -31,28 +31,29 @@ class _AddUserState extends State<Adduser> {
         title: const Text("Add Users"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
             TextField(
               controller: studentName,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: OutlineInputBorder(), label: Text("Name")),
             ),
             Padding(
-              padding: EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(15.0),
               child: TextField(
                 controller: studentPhone,
                 keyboardType: TextInputType.number,
                 maxLength: 10,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(), label: Text("Phone Number")),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: DropdownButtonFormField(
-                  decoration: InputDecoration(label: Text("Select division")),
+                  decoration:
+                      const InputDecoration(label: Text("Select division")),
                   items: division
                       .map((e) => DropdownMenuItem(
                             child: Text(e),
@@ -69,9 +70,9 @@ class _AddUserState extends State<Adduser> {
                 navigator!.pop();
               },
               style: ButtonStyle(
-                  minimumSize:
-                      MaterialStateProperty.all(Size(double.infinity, 50))),
-              child: Text(
+                  minimumSize: MaterialStateProperty.all(
+                      const Size(double.infinity, 50))),
+              child: const Text(
                 "Submit",
                 style: TextStyle(fontSize: 20),
               ),
