@@ -26,113 +26,116 @@ class _otpState extends State<otp> {
     phoneController.selection = TextSelection.fromPosition(
         TextPosition(offset: phoneController.text.length));
     return Scaffold(
+      appBar: AppBar(
+        title: Text("O T P"),
+      ),
       body: SafeArea(
           child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
-          child: Column(
-            children: [
-              Container(
-                  width: 200,
-                  height: 200,
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.people,
-                    size: 150,
-                  )),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Register",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              const Text(
-                "Add Your Phone number to get verification code",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: phoneController,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                    width: 200,
+                    height: 200,
+                    padding: const EdgeInsets.all(20.0),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.people,
+                      size: 150,
+                    )),
+                const SizedBox(
+                  height: 20,
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    phoneController.text = value;
-                  });
-                },
-                decoration: InputDecoration(
-                  hintText: "Enter Phone Number",
-                  hintStyle: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                const Text(
+                  "Register",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Add Your Phone number to get verification code",
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: phoneController,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                  enabledBorder: OutlineInputBorder(
+                  onChanged: (value) {
+                    setState(() {
+                      phoneController.text = value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Enter Phone Number",
+                    hintStyle: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.black12)),
+                    focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: Colors.black12)),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.black12),
-                  ),
-                  prefixIcon: Container(
-                    padding: EdgeInsets.all(8.0),
-                    child: InkWell(
-                      onTap: () {
-                        showCountryPicker(
-                            context: context,
-                            countryListTheme:
-                                CountryListThemeData(bottomSheetHeight: 550),
-                            onSelect: ((value) {
-                              setState(() {
-                                Selectedcountry = value;
-                              });
-                            }));
-                      },
-                      child: Text(
-                        "${Selectedcountry.flagEmoji} + ${Selectedcountry.phoneCode}",
-                        style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
+                      borderSide: const BorderSide(color: Colors.black12),
+                    ),
+                    prefixIcon: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () {
+                          showCountryPicker(
+                              context: context,
+                              countryListTheme: const CountryListThemeData(
+                                  bottomSheetHeight: 550),
+                              onSelect: ((value) {
+                                setState(() {
+                                  Selectedcountry = value;
+                                });
+                              }));
+                        },
+                        child: Text(
+                          "${Selectedcountry.flagEmoji} + ${Selectedcountry.phoneCode}",
+                          style: const TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
+                    suffixIcon: phoneController.text.length > 9
+                        ? Container(
+                            height: 30,
+                            width: 30,
+                            margin: const EdgeInsets.all(10.0),
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle, color: Colors.green),
+                            child: const Icon(
+                              Icons.done,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          )
+                        : null,
                   ),
-                  suffixIcon: phoneController.text.length > 9
-                      ? Container(
-                          height: 30,
-                          width: 30,
-                          margin: EdgeInsets.all(10.0),
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.green),
-                          child: Icon(
-                            Icons.done,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        )
-                      : null,
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: 50,
-                width: double.infinity,
-                child: CustomButton(onPressed: () {}, text: "Login"),
-              )
-            ],
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: CustomButton(onPressed: () {}, text: "Login"),
+                )
+              ],
+            ),
           ),
         ),
       )),
