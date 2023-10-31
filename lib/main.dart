@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'My App',
         theme: isDarkmode.value ? ThemeData.dark() : ThemeData.light(),
         home: Scaffold(
