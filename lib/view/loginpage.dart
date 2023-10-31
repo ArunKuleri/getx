@@ -2,8 +2,10 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/user.dart';
+import 'package:flutter_application_1/services/google.dart';
 import 'package:flutter_application_1/view/studentd/dashbord.dart';
 import 'package:flutter_application_1/view/studentd/otppage.dart';
+import 'package:flutter_application_1/widgets/custombutton.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
@@ -97,16 +99,12 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Get.to(otp());
-                  },
-                  child: Text('Sign in with OTP'),
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                ),
+                CustomButton(
+                    onPressed: () async {
+                      await FirebaseServices().signInWithGoolge();
+                      Get.off(Dashboard());
+                    },
+                    text: "Sign In With Google"),
               ],
             ),
           ),

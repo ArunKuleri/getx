@@ -71,7 +71,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                           ),
@@ -93,7 +93,7 @@ class _OtpScreenState extends State<OtpScreen> {
                               if (otpCode != null) {
                                 verifyOtp(context, otpCode!);
                               } else {
-                                SnackBar(
+                                const SnackBar(
                                   content: Text("enter 6 digit code"),
                                 );
                               }

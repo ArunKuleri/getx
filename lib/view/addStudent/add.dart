@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Adduser extends StatefulWidget {
   const Adduser({super.key});
@@ -65,6 +66,7 @@ class _AddUserState extends State<Adduser> {
             ElevatedButton(
               onPressed: () {
                 addStudent();
+                navigator!.pop();
               },
               style: ButtonStyle(
                   minimumSize:

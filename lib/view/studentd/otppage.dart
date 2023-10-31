@@ -1,6 +1,10 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/services/google.dart';
+import 'package:flutter_application_1/view/studentd/dashbord.dart';
 import 'package:flutter_application_1/widgets/custombutton.dart';
+import 'package:flutter_application_1/controller/otp/otp_controller.dart';
+import 'package:get/get.dart';
 
 class otp extends StatefulWidget {
   const otp({super.key});
@@ -132,7 +136,12 @@ class _otpState extends State<otp> {
                 SizedBox(
                   height: 50,
                   width: double.infinity,
-                  child: CustomButton(onPressed: () {}, text: "Login"),
+                  child: CustomButton(
+                      onPressed: () async {
+                        await FirebaseServices().signInWithGoolge();
+                        Get.off(Dashboard());
+                      },
+                      text: "Login"),
                 )
               ],
             ),
