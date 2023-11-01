@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/view/addStudent/add.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 class AddStudent extends StatefulWidget {
   const AddStudent({super.key});
@@ -78,7 +79,16 @@ class _AddStudentState extends State<AddStudent> {
                         Row(
                           children: [
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.toNamed('/editStudent', arguments: {
+                                  'name': studentSnap['name'],
+                                  'division':
+                                      studentSnap['division'].toString(),
+                                  'phone number':
+                                      studentSnap['phone number'].toString(),
+                                  'id': studentSnap.id,
+                                });
+                              },
                               icon: Icon(Icons.edit),
                               iconSize: 30,
                               color: Colors.blue,

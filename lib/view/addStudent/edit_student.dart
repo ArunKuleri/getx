@@ -1,31 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/toggle_controller.dart';
 import 'package:get/get.dart';
 
-class Adduser extends StatefulWidget {
-  const Adduser({super.key});
+class editStudent extends StatefulWidget {
+  const editStudent({super.key});
   @override
-  State<Adduser> createState() => _AddUserState();
+  State<editStudent> createState() => _editStudent();
 }
 
-class _AddUserState extends State<Adduser> {
+class _editStudent extends State<editStudent> {
   final division = ['A', 'B', 'C', 'D', 'E'];
   String? selecteddivision;
   final CollectionReference student =
       FirebaseFirestore.instance.collection('student');
   TextEditingController studentName = TextEditingController();
   TextEditingController studentPhone = TextEditingController();
-  void addStudent() {
+  String? docId;
+  void updatetudent(docId) {
     final data = {
       'name': studentName.text,
       'phone number': studentPhone.text,
       'division': selecteddivision
     };
-    student.add(data);
+    student.doc(docId).update(data);
   }
 
   @override
   Widget build(BuildContext context) {
+    final arguments = Get.arguments as Map<String, dynamic>;
+    if (arguments != null) {
+      String name = arguments['name'];
+      String phoneNumber = arguments['phone number'].toString();
+      String division = arguments['division'].toString();
+      final docId = arguments['id'];
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Users"),
@@ -65,8 +74,8 @@ class _AddUserState extends State<Adduser> {
             ),
             ElevatedButton(
               onPressed: () {
-                addStudent();
-                navigator!.pop();
+                updatetudent(docId);
+                Get.toNamed('/update');
               },
               style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(

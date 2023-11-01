@@ -9,16 +9,31 @@ class TodoPage extends StatelessWidget {
   final TodoController todoContoller = Get.put(TodoController());
   void _showAddTextDialog() {
     Get.defaultDialog(
-      title: "Add a new Task",
-      content: TextField(
-        autofocus: true,
-        controller: _textFieldController,
-        decoration: InputDecoration(hintText: "Add New Task"),
-        onSubmitted: (_) => _submit(),
-      ),
-      textConfirm: "Submit",
-      onConfirm: _submit,
-    );
+        title: "Add a new Task",
+        content: Column(
+          children: [
+            TextFormField(
+              autofocus: true,
+              controller: _textFieldController,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return "please enter a task";
+                }
+                return null;
+              },
+              decoration: InputDecoration(hintText: "Add New Task"),
+            ),
+          ],
+        ),
+        textConfirm: "Submit",
+        onConfirm: () {
+          if (_textFieldController.text == null ||
+              _textFieldController.text.isEmpty) {
+            Get.snackbar("Validation Error", "Please enter a task.");
+          } else {
+            _submit();
+          }
+        });
   }
 
   void _submit() {
