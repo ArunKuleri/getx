@@ -7,7 +7,6 @@ class FirebaseServices {
 
   signInWithGoolge() async {
     try {
-      // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser != null) {
         // Obtain the auth details from the request

@@ -20,17 +20,17 @@ class _AddStudentState extends State<AddStudent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Student Data"),
+        title: const Text("Student Data"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Adduser(),
+                builder: (context) => const Adduser(),
               ));
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
           size: 40,
         ),
@@ -56,7 +56,7 @@ class _AddStudentState extends State<AddStudent> {
                             radius: 30,
                             child: Text(
                               studentSnap['division'],
-                              style: TextStyle(fontSize: 25),
+                              style: const TextStyle(fontSize: 25),
                             ),
                           ),
                         ),
@@ -65,12 +65,12 @@ class _AddStudentState extends State<AddStudent> {
                           children: [
                             Text(
                               studentSnap['name'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Text(
                               studentSnap['phone number'].toString(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                               ),
                             ),
@@ -89,7 +89,7 @@ class _AddStudentState extends State<AddStudent> {
                                   'id': studentSnap.id,
                                 });
                               },
-                              icon: Icon(Icons.edit),
+                              icon: const Icon(Icons.edit),
                               iconSize: 30,
                               color: Colors.blue,
                             ),
@@ -97,7 +97,7 @@ class _AddStudentState extends State<AddStudent> {
                               onPressed: () {
                                 deleteStudent(studentSnap.id);
                               },
-                              icon: Icon(Icons.delete),
+                              icon: const Icon(Icons.delete),
                               iconSize: 30,
                               color: Colors.red,
                             )
