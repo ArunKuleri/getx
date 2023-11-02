@@ -24,7 +24,7 @@ class TodoAction extends StatelessWidget {
               title: Text(task.todoTitle),
               trailing: IconButton(
                 onPressed: () => todoController.deleteTask(task),
-                icon: Icon(Icons.delete),
+                icon: const Icon(Icons.delete),
               ),
             );
           },

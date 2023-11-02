@@ -1,22 +1,42 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/sidebarcontroller.dart';
+import 'package:flutter_application_1/controller/toggle_controller.dart';
 import 'package:flutter_application_1/services/google.dart';
 import 'package:flutter_application_1/view/addStudent/addstudent.dart';
-import 'package:flutter_application_1/view/loginpage.dart';
 import 'package:flutter_application_1/view/todo/todo.dart';
 import 'package:get/get.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key});
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   final SidebarController sidebarController = Get.put(SidebarController());
+  final controller = Get.put(DarkModeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
-            leading: Icon(Icons.account_box_sharp),
+          SliverAppBar(
+            leading: Obx(
+              () => IconButton(
+                onPressed: () {
+                  Get.changeThemeMode(controller.changeTheme());
+                },
+                icon: Icon(
+                  controller.themeMode.value == ThemeMode.light
+                      ? Icons.dark_mode
+                      : Icons.light_mode,
+                ),
+              ),
+            ),
             title: Text("D A S H B O A R D"),
-            expandedHeight: 300,
+            expandedHeight: 100,
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -24,7 +44,7 @@ class Dashboard extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: Card(
-                    child: Container(
+                    child: SizedBox(
                       height: 150,
                       width: 150,
                       child: ListTile(
@@ -46,7 +66,7 @@ class Dashboard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Card(
-                    child: Container(
+                    child: SizedBox(
                   height: 150,
                   width: 150,
                   child: ListTile(
@@ -64,7 +84,7 @@ class Dashboard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Card(
-                  child: Container(
+                  child: SizedBox(
                     height: 150,
                     width: 150,
                     child: ListTile(
@@ -85,7 +105,7 @@ class Dashboard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Card(
-                  child: Container(
+                  child: SizedBox(
                     height: 150,
                     width: 150,
                     child: ListTile(
@@ -104,7 +124,7 @@ class Dashboard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Card(
-                  child: Container(
+                  child: SizedBox(
                     height: 150,
                     width: 150,
                     child: ListTile(
@@ -119,31 +139,57 @@ class Dashboard extends StatelessWidget {
               ),
             ),
           ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Card(
+                  child: SizedBox(
+                    height: 150,
+                    width: 150,
+                    child: ListTile(
+                      leading: const Icon(Icons.chat_bubble_outline_rounded),
+                      title: const Text(
+                        "Chat with Your Tutor",
+                      ),
+                      onTap: () {},
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
-      endDrawer: GetBuilder<SidebarController>(
-        builder: (controller) => Drawer(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            children: [
-              const DrawerHeader(
-                child: Text("Sidebar"),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text(
+                '${FirebaseAuth.instance.currentUser!.displayName}',
+                style: TextStyle(color: Colors.black),
+              ), // Replace w, // Replace with user's name
+              accountEmail: Text(
+                '${FirebaseAuth.instance.currentUser!.email}',
+                style: TextStyle(color: Colors.black),
+              ), // Replace with user's email
+              currentAccountPicture: CircleAvatar(
+                // Replace with user's profile picture
+                backgroundImage: NetworkImage(
+                    '${FirebaseAuth.instance.currentUser!.photoURL!}'),
               ),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text("Log Out"),
-                onTap: () async {
-                  await FirebaseServices().signOut();
-                  Get.to(LoginPage());
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text('Settings'),
-                onTap: () {},
-              ),
-            ],
-          ),
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text("Logout"),
+              onTap: () async {
+                await FirebaseServices().signOut();
+              },
+            ),
+            // Add more drawer items as needed
+          ],
         ),
       ),
     );

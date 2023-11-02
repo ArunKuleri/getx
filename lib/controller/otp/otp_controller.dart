@@ -1,16 +1,11 @@
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/model/otp/otp_model.dart';
 import 'package:flutter_application_1/view/studentd/otpScreen.dart';
 import 'package:get/get.dart';
 
 class OtpController extends GetxController {
-  bool _isSignedIn = false;
+  final bool _isSignedIn = false;
   bool get isSignedIn => _isSignedIn;
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -19,8 +14,6 @@ class OtpController extends GetxController {
   UserModel? _userModel;
   UserModel get userModel => _userModel!;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
   void signInWithPhone(String phoneNmber) async {
     try {
@@ -44,6 +37,7 @@ class OtpController extends GetxController {
 
   void verifyOtp({
     required String verificaionId,
+    // ignore: non_constant_identifier_names
     required String UserOtp,
     required Function onSuccess,
     required BuildContext context,

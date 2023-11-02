@@ -1,7 +1,6 @@
-import 'dart:ffi';
+// ignore_for_file: empty_catches, avoid_print
 
 import 'package:get/get.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserController extends GetxController {
@@ -18,9 +17,7 @@ class UserController extends GetxController {
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-    } catch (e) {
-      print(e.toString());
-    }
+    } catch (e) {}
   }
 
   Future<void> signWithAndPassword(String email, String password) async {

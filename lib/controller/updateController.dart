@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:get/get.dart';
 
 class UpdateController extends GetxController {
@@ -9,11 +11,6 @@ class UpdateController extends GetxController {
     arguments = Get.arguments;
 
     if (arguments != null) {
-      String name = arguments!['name'];
-      String phonenumber = arguments!['phone number'].toString();
-      String age = arguments!['division'].toString();
-      String docId = arguments!['id'];
-
       // Now you can use these arguments as needed within this controller.
     }
   }

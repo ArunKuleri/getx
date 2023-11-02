@@ -1,9 +1,10 @@
+// ignore_for_file: camel_case_types
+
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/google.dart';
 import 'package:flutter_application_1/view/studentd/dashbord.dart';
 import 'package:flutter_application_1/widgets/custombutton.dart';
-import 'package:flutter_application_1/controller/otp/otp_controller.dart';
 import 'package:get/get.dart';
 
 class otp extends StatefulWidget {
@@ -14,6 +15,7 @@ class otp extends StatefulWidget {
 
 class _otpState extends State<otp> {
   final TextEditingController phoneController = TextEditingController();
+  // ignore: non_constant_identifier_names
   Country Selectedcountry = Country(
       phoneCode: "91",
       countryCode: "IN",
@@ -31,7 +33,7 @@ class _otpState extends State<otp> {
         TextPosition(offset: phoneController.text.length));
     return Scaffold(
       appBar: AppBar(
-        title: Text("O T P"),
+        title: const Text("O T P"),
       ),
       body: SafeArea(
           child: Center(
@@ -139,7 +141,7 @@ class _otpState extends State<otp> {
                   child: CustomButton(
                       onPressed: () async {
                         await FirebaseServices().signInWithGoolge();
-                        Get.off(Dashboard());
+                        Get.off(const Dashboard());
                       },
                       text: "Login"),
                 )

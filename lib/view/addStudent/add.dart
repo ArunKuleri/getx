@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/todo_controller/add_user_controller/add_user_controler.dart';
 import 'package:get/get.dart';
 
 class Adduser extends StatefulWidget {
@@ -15,14 +16,15 @@ class _AddUserState extends State<Adduser> {
       FirebaseFirestore.instance.collection('student');
   TextEditingController studentName = TextEditingController();
   TextEditingController studentPhone = TextEditingController();
-  void addStudent() {
-    final data = {
-      'name': studentName.text,
-      'phone number': studentPhone.text,
-      'division': selecteddivision
-    };
-    student.add(data);
-  }
+  final AddUserontroller addUserontroller = Get.put(AddUserontroller());
+  // void addStudent() {
+  //   final data = {
+  //     'name': studentName.text,
+  //     'phone number': studentPhone.text,
+  //     'division': selecteddivision
+  //   };
+  //   student.add(data);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +57,8 @@ class _AddUserState extends State<Adduser> {
                       const InputDecoration(label: Text("Select division")),
                   items: division
                       .map((e) => DropdownMenuItem(
-                            child: Text(e),
                             value: e,
+                            child: Text(e),
                           ))
                       .toList(),
                   onChanged: (value) {
@@ -65,8 +67,10 @@ class _AddUserState extends State<Adduser> {
             ),
             ElevatedButton(
               onPressed: () {
-                addStudent();
-                navigator!.pop();
+                addUserontroller.addStudent(
+                    studentName, studentPhone, division);
+
+                Get.back();
               },
               style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(

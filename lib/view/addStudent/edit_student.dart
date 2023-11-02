@@ -1,6 +1,7 @@
+// ignore_for_file: unnecessary_null_comparison, camel_case_types
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/toggle_controller.dart';
 import 'package:get/get.dart';
 
 class editStudent extends StatefulWidget {
@@ -30,8 +31,6 @@ class _editStudent extends State<editStudent> {
   Widget build(BuildContext context) {
     final arguments = Get.arguments as Map<String, dynamic>;
     if (arguments != null) {
-      String name = arguments['name'];
-      final phoneNumber = arguments['phone number'].toString();
       final division = arguments['division'].toString();
       final docId = arguments['id'];
 
@@ -67,12 +66,12 @@ class _editStudent extends State<editStudent> {
                     items: division
                         .split("")
                         .map((e) => DropdownMenuItem(
-                              child: Text(e),
                               value: e,
+                              child: Text(e),
                             ))
                         .toList(),
                     onChanged: (value) {
-                      selecteddivision = value as String?;
+                      selecteddivision = value;
                     }),
               ),
               ElevatedButton(

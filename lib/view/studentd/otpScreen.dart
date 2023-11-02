@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/widgets/custombutton.dart';
 import 'package:pinput/pinput.dart';
@@ -15,7 +17,7 @@ class _OtpScreenState extends State<OtpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("OTP"),
+          title: const Text("OTP"),
         ),
         body: SafeArea(
             child: Center(

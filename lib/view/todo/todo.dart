@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/todo_controller/todo_controller.dart';
 import 'package:flutter_application_1/widgets/todo_action.dart';
 import 'package:get/get.dart';
-import 'package:flutter_application_1/model/todo_model/todomodel.dart';
 
 class TodoPage extends StatelessWidget {
   final TextEditingController _textFieldController = TextEditingController();
   final TodoController todoContoller = Get.put(TodoController());
+
+  TodoPage({super.key});
   void _showAddTextDialog() {
     Get.defaultDialog(
         title: "Add a new Task",
@@ -21,14 +22,13 @@ class TodoPage extends StatelessWidget {
                 }
                 return null;
               },
-              decoration: InputDecoration(hintText: "Add New Task"),
+              decoration: const InputDecoration(hintText: "Add New Task"),
             ),
           ],
         ),
         textConfirm: "Submit",
         onConfirm: () {
-          if (_textFieldController.text == null ||
-              _textFieldController.text.isEmpty) {
+          if (_textFieldController.text.isEmpty) {
             Get.snackbar("Validation Error", "Please enter a task.");
           } else {
             _submit();
@@ -46,13 +46,13 @@ class TodoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tasks"),
+        title: const Text("Tasks"),
       ),
       body: TodoAction(),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddTextDialog,
         tooltip: "Add a Todo",
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

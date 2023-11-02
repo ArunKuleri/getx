@@ -1,11 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/toggle_controller.dart';
 import 'package:flutter_application_1/controller/user.dart';
 import 'package:flutter_application_1/services/google.dart';
 import 'package:flutter_application_1/view/studentd/dashbord.dart';
-import 'package:flutter_application_1/view/studentd/otppage.dart';
 import 'package:flutter_application_1/widgets/custombutton.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +12,8 @@ class LoginPage extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final RxBool showSignupForm = false.obs;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  LoginPage({super.key});
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'please enter your email';
@@ -31,24 +30,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(DarkModeController());
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Obx(
-            () => IconButton(
-              onPressed: () {
-                Get.changeThemeMode(controller.changeTheme());
-              },
-              icon: Icon(
-                controller.themeMode.value == ThemeMode.light
-                    ? Icons.dark_mode
-                    : Icons.light_mode,
-              ),
-            ),
-          ),
-        ],
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: SingleChildScrollView(
@@ -93,7 +76,7 @@ class LoginPage extends StatelessWidget {
                         emailController.text,
                         passwordController.text,
                       );
-                      Get.to(() => Dashboard());
+                      Get.to(() => const Dashboard());
                     }
                   },
                   child: Obx(() {
@@ -110,17 +93,17 @@ class LoginPage extends StatelessWidget {
                       ? 'I already Have an account?'
                       : "Create An Account");
                 })),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text("OR"),
-                SizedBox(
+                const Text("OR"),
+                const SizedBox(
                   height: 10,
                 ),
                 CustomButton(
                     onPressed: () async {
                       await FirebaseServices().signInWithGoolge();
-                      Get.off(Dashboard());
+                      Get.off(const Dashboard());
                     },
                     text: "Sign In With Google"),
               ],

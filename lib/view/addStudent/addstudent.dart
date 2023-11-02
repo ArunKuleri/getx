@@ -46,18 +46,16 @@ class _AddStudentState extends State<AddStudent> {
                 final DocumentSnapshot studentSnap = snapshot.data.docs[index];
                 return Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Container(
+                  child: SizedBox(
                     height: 80,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          child: CircleAvatar(
-                            radius: 30,
-                            child: Text(
-                              studentSnap['division'],
-                              style: const TextStyle(fontSize: 25),
-                            ),
+                        CircleAvatar(
+                          radius: 30,
+                          child: Text(
+                            studentSnap['division'].toString(),
+                            style: const TextStyle(fontSize: 25),
                           ),
                         ),
                         Column(

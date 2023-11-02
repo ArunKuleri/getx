@@ -55,8 +55,8 @@ class _AddUserState extends State<UpdateUser> {
                       const InputDecoration(label: Text("Select division")),
                   items: division
                       .map((e) => DropdownMenuItem(
-                            child: Text(e),
                             value: e,
+                            child: Text(e),
                           ))
                       .toList(),
                   onChanged: (value) {
