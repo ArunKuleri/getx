@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/view/chat/chat.dart';
 import 'package:flutter_application_1/view/studentd/dashbord.dart';
+import 'package:get/get.dart';
 
 // ignore: camel_case_types
 class tutors extends StatelessWidget {
@@ -29,7 +31,9 @@ class tutors extends StatelessWidget {
             SizedBox(
               height: 35,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => Chat());
+                },
                 child: const Text("FLUTTER"),
               ),
             ),
@@ -44,7 +48,9 @@ class tutors extends StatelessWidget {
             SizedBox(
               height: 35,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => Chat());
+                },
                 child: const Text("MEARN"),
               ),
             ),
@@ -59,7 +65,9 @@ class tutors extends StatelessWidget {
             SizedBox(
               height: 35,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => Chat());
+                },
                 child: const Text("MEAN"),
               ),
             ),
@@ -74,7 +82,9 @@ class tutors extends StatelessWidget {
             SizedBox(
               height: 35,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => Chat());
+                },
                 child: const Text("PYTHON DJANGO"),
               ),
             ),
