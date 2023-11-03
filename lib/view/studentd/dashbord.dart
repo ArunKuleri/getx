@@ -5,6 +5,7 @@ import 'package:flutter_application_1/controller/toggle_controller.dart';
 import 'package:flutter_application_1/services/google.dart';
 import 'package:flutter_application_1/view/addStudent/addstudent.dart';
 import 'package:flutter_application_1/view/todo/todo.dart';
+import 'package:flutter_application_1/view/tutors/tutors.dart';
 import 'package:get/get.dart';
 
 class Dashboard extends StatefulWidget {
@@ -35,7 +36,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
             ),
-            title: Text("D A S H B O A R D"),
+            title: const Text("D A S H B O A R D"),
             expandedHeight: 100,
           ),
           SliverToBoxAdapter(
@@ -153,7 +154,9 @@ class _DashboardState extends State<Dashboard> {
                       title: const Text(
                         "Chat with Your Tutor",
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => const tutors());
+                      },
                     ),
                   ),
                 ),
@@ -168,16 +171,16 @@ class _DashboardState extends State<Dashboard> {
             UserAccountsDrawerHeader(
               accountName: Text(
                 '${FirebaseAuth.instance.currentUser!.displayName}',
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               ), // Replace w, // Replace with user's name
               accountEmail: Text(
                 '${FirebaseAuth.instance.currentUser!.email}',
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               ), // Replace with user's email
               currentAccountPicture: CircleAvatar(
                 // Replace with user's profile picture
-                backgroundImage: NetworkImage(
-                    '${FirebaseAuth.instance.currentUser!.photoURL!}'),
+                backgroundImage:
+                    NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!),
               ),
             ),
 

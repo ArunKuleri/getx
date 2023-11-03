@@ -23,7 +23,7 @@ class FirebaseServices {
       // Once signed in, return the UserCredential
     } on FirebaseAuthException catch (e) {
       print(e.message);
-      throw e;
+      rethrow;
     }
   }
 
