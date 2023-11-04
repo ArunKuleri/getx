@@ -32,7 +32,7 @@ class tutors extends StatelessWidget {
               height: 35,
               child: TextButton(
                 onPressed: () {
-                  Get.to(() => Chat());
+                  Get.to(() => const Chat());
                 },
                 child: const Text("FLUTTER"),
               ),
@@ -49,7 +49,7 @@ class tutors extends StatelessWidget {
               height: 35,
               child: TextButton(
                 onPressed: () {
-                  Get.to(() => Chat());
+                  Get.to(() => const Chat());
                 },
                 child: const Text("MEARN"),
               ),
@@ -66,7 +66,7 @@ class tutors extends StatelessWidget {
               height: 35,
               child: TextButton(
                 onPressed: () {
-                  Get.to(() => Chat());
+                  Get.to(() => const Chat());
                 },
                 child: const Text("MEAN"),
               ),
@@ -83,7 +83,7 @@ class tutors extends StatelessWidget {
               height: 35,
               child: TextButton(
                 onPressed: () {
-                  Get.to(() => Chat());
+                  Get.to(() => const Chat());
                 },
                 child: const Text("PYTHON DJANGO"),
               ),
