@@ -11,12 +11,13 @@ import 'package:flutter_application_1/view/loginpage.dart';
 import 'package:flutter_application_1/view/studentd/dashbord.dart';
 import 'package:flutter_application_1/view/update/update.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
+  var permission = await Permission.location.request();
   runApp(const MyApp());
 }
 
