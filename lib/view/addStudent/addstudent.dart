@@ -27,7 +27,7 @@ class _AddStudentState extends State<AddStudent> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const Adduser(),
+                builder: (context) => Adduser(),
               ));
         },
         child: const Icon(

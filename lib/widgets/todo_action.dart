@@ -17,10 +17,6 @@ class TodoAction extends StatelessWidget {
           itemBuilder: (context, index) {
             final task = allTasks[index];
             return ListTile(
-              leading: Checkbox(
-                value: task.Completed,
-                onChanged: (_) => todoController.toggleTask(task),
-              ),
               title: Text(task.todoTitle),
               trailing: IconButton(
                 onPressed: () => todoController.deleteTask(task),

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/view/addStudent/edit_student.dart';
+import 'package:get/get.dart';
 
 class UpdateUser extends StatefulWidget {
   const UpdateUser({super.key});
@@ -43,7 +45,6 @@ class _AddUserState extends State<UpdateUser> {
               child: TextField(
                 controller: studentPhone,
                 keyboardType: TextInputType.number,
-                maxLength: 10,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(), label: Text("Name")),
               ),
@@ -66,6 +67,7 @@ class _AddUserState extends State<UpdateUser> {
             ElevatedButton(
               onPressed: () {
                 addStudent();
+                Get.toNamed('/editStudent');
               },
               style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(

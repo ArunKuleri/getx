@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/updateController.dart';
 import 'package:get/get.dart';
 
 class editStudent extends StatefulWidget {
@@ -17,6 +18,7 @@ class _editStudent extends State<editStudent> {
       FirebaseFirestore.instance.collection('student');
   TextEditingController studentName = TextEditingController();
   TextEditingController studentPhone = TextEditingController();
+
   String? docId;
   void updatetudent(docId) {
     final data = {
@@ -29,33 +31,33 @@ class _editStudent extends State<editStudent> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = Get.arguments as Map<String, dynamic>;
-    if (arguments != null) {
-      final division = arguments['division'].toString();
-      final docId = arguments['id'];
+    final data = Get.arguments as Map;
+    if (data != null) {
+      final division = data['division'].toString();
+      final docId = data['id'];
 
       return Scaffold(
         appBar: AppBar(
-          title: const Text("Add Users"),
+          title: const Text("Edit"),
         ),
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              TextField(
+              TextFormField(
                 controller: studentName,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), label: Text("Name")),
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    label: Text(data["name"].toString())),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: TextField(
+                child: TextFormField(
                   controller: studentPhone,
                   keyboardType: TextInputType.number,
-                  maxLength: 10,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      label: Text("Phone Number")),
+                      labelText: (data["phone number"].toString())),
                 ),
               ),
               Padding(
@@ -64,7 +66,7 @@ class _editStudent extends State<editStudent> {
                     decoration:
                         const InputDecoration(label: Text("Select division")),
                     items: division
-                        .split("")
+                        .split('')
                         .map((e) => DropdownMenuItem(
                               value: e,
                               child: Text(e),
@@ -77,7 +79,7 @@ class _editStudent extends State<editStudent> {
               ElevatedButton(
                 onPressed: () {
                   updatetudent(docId);
-                  Get.toNamed('/update');
+                  Get.back();
                 },
                 style: ButtonStyle(
                     minimumSize: MaterialStateProperty.all(
