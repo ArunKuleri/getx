@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison, camel_case_types
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/updateController.dart';
@@ -12,7 +14,7 @@ class editStudent extends StatefulWidget {
 }
 
 class _editStudent extends State<editStudent> {
-  final division = ['A', 'B', 'C', 'D', 'E'];
+  List<String> division = ['A', 'B', 'C', 'D', 'E'];
   String? selecteddivision;
   final CollectionReference student =
       FirebaseFirestore.instance.collection('student');
@@ -20,12 +22,14 @@ class _editStudent extends State<editStudent> {
   TextEditingController studentPhone = TextEditingController();
 
   String? docId;
-  void updatetudent(docId) {
+  void updatestudent(docId, name, number, division) {
     final data = {
-      'name': studentName.text,
-      'phone number': studentPhone.text,
-      'division': selecteddivision
+      'name': name,
+      'phone number': number,
+      'division': division,
     };
+    log(data.toString());
+
     student.doc(docId).update(data);
   }
 
@@ -33,7 +37,9 @@ class _editStudent extends State<editStudent> {
   Widget build(BuildContext context) {
     final data = Get.arguments as Map;
     if (data != null) {
-      final division = data['division'].toString();
+      studentName.text = data['name'].toString();
+      studentPhone.text = data['phone number'].toString();
+      selecteddivision = data['division'].toString();
       final docId = data['id'];
 
       return Scaffold(
@@ -46,39 +52,47 @@ class _editStudent extends State<editStudent> {
             children: [
               TextFormField(
                 controller: studentName,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    label: Text(data["name"].toString())),
+                keyboardType: TextInputType.text,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: TextFormField(
                   controller: studentPhone,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: (data["phone number"].toString())),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: DropdownButtonFormField(
-                    decoration:
-                        const InputDecoration(label: Text("Select division")),
-                    items: division
-                        .split('')
-                        .map((e) => DropdownMenuItem(
-                              value: e,
-                              child: Text(e),
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      selecteddivision = value;
+                child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      label: Text("division"),
+                    ),
+                    value: selecteddivision,
+                    items: division.map((String division) {
+                      return DropdownMenuItem(
+                          value: division,
+                          child: Text(
+                            division.toString(),
+                          ));
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      selecteddivision = newValue;
                     }),
               ),
               ElevatedButton(
                 onPressed: () {
-                  updatetudent(docId);
+                  updatestudent(
+                    docId,
+                    studentName.text,
+                    studentPhone.text,
+                    selecteddivision,
+                  );
                   Get.back();
                 },
                 style: ButtonStyle(
