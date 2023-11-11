@@ -89,7 +89,6 @@ class _AddStudentState extends State<AddStudent> {
                               },
                               icon: const Icon(Icons.edit),
                               iconSize: 30,
-                              color: Colors.blue,
                             ),
                             IconButton(
                               onPressed: () {
@@ -97,7 +96,6 @@ class _AddStudentState extends State<AddStudent> {
                               },
                               icon: const Icon(Icons.delete),
                               iconSize: 30,
-                              color: Colors.red,
                             )
                           ],
                         )

@@ -39,20 +39,20 @@ class Adduser extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(10.0),
           child: Form(
             key: formKey,
             child: Column(
               children: [
                 UserImagePicker(),
-                TextField(
+                TextFormField(
                   controller: studentName,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), label: Text("Name")),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: TextField(
+                  padding: const EdgeInsets.all(20.0),
+                  child: TextFormField(
                     controller: studentPhone,
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
@@ -61,10 +61,10 @@ class Adduser extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(children: [
                     Expanded(
-                      child: TextField(
+                      child: TextFormField(
                         controller: placeLocation.studentPhone,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -84,7 +84,7 @@ class Adduser extends StatelessWidget {
                   ]),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: DropdownButtonFormField(
                       decoration:
                           const InputDecoration(label: Text("Select division")),
@@ -98,6 +98,9 @@ class Adduser extends StatelessWidget {
                         selecteddivision = newValue;
                       }),
                 ),
+                const SizedBox(
+                  height: 15,
+                ),
                 ElevatedButton(
                   onPressed: () {
                     addStudent();
@@ -106,11 +109,13 @@ class Adduser extends StatelessWidget {
                     Get.back();
                   },
                   style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all(
-                          const Size(double.infinity, 50))),
+                    minimumSize: MaterialStateProperty.all(
+                        const Size(double.infinity, 50)),
+                    backgroundColor: MaterialStateProperty.all(Colors.black),
+                  ),
                   child: const Text(
                     "Submit",
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 )
               ],
