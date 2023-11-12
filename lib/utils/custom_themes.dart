@@ -10,9 +10,9 @@ class CustomThemes {
 
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xFF6750A4),
-  onPrimary: Color(0xFFFFFFFF),
-  primaryContainer: Color(0xFFEADDFF),
+  primary: Color.fromARGB(255, 245, 245, 245),
+  onPrimary: Color.fromARGB(255, 0, 0, 0),
+  primaryContainer: Color.fromARGB(255, 96, 83, 155),
   onPrimaryContainer: Color(0xFF21005D),
   secondary: Color(0xFF625B71),
   onSecondary: Color(0xFFFFFFFF),
@@ -75,3 +75,13 @@ const darkColorScheme = ColorScheme(
   outlineVariant: Color(0xFF49454F),
   scrim: Color(0xFF000000),
 );
+final lightTheme = ThemeData(
+    colorScheme: lightColorScheme,
+    textTheme: const TextTheme(
+      bodyText1: TextStyle(color: Colors.black),
+      bodyText2: TextStyle(color: Colors.black),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            foregroundColor: MaterialStateProperty.all(Colors.black),
+            backgroundColor: MaterialStateProperty.all(Colors.white))));

@@ -47,63 +47,72 @@ class Adduser extends StatelessWidget {
                 UserImagePicker(),
                 TextFormField(
                   controller: studentName,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "please enter a value";
+                    }
+                  },
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), label: Text("Name")),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: TextFormField(
-                    controller: studentPhone,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        label: Text("Phone Number")),
-                  ),
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: studentPhone,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "please enter a value";
+                    }
+                  },
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      label: Text("Phone Number")),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: placeLocation.studentPhone,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          label: Text(
-                            "LAT: ${placeLocation.currentPosition?.latitude ?? ""}",
-                            semanticsLabel:
-                                "LNG:${placeLocation.currentPosition?.longitude ?? ""}",
-                          ),
+                const SizedBox(height: 12),
+                Row(children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: placeLocation.studentPhone,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "please enter a value";
+                        }
+                      },
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text(
+                          "LAT: ${placeLocation.currentPosition?.latitude ?? ""}",
+                          semanticsLabel:
+                              "LNG:${placeLocation.currentPosition?.longitude ?? ""}",
                         ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () => placeLocation.getCurrentPosition(),
-                      icon: const Icon(Icons.pin_drop),
-                    )
-                  ]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: DropdownButtonFormField(
-                      decoration:
-                          const InputDecoration(label: Text("Select division")),
-                      items: division
-                          .map((e) => DropdownMenuItem(
-                                value: e,
-                                child: Text(e),
-                              ))
-                          .toList(),
-                      onChanged: (String? newValue) {
-                        selecteddivision = newValue;
-                      }),
-                ),
+                  ),
+                  IconButton(
+                    onPressed: () => placeLocation.getCurrentPosition(),
+                    icon: const Icon(Icons.pin_drop),
+                  )
+                ]),
+                const SizedBox(height: 12),
+                DropdownButtonFormField(
+                    decoration:
+                        const InputDecoration(label: Text("Select division")),
+                    items: division
+                        .map((e) => DropdownMenuItem(
+                              value: e,
+                              child: Text(e),
+                            ))
+                        .toList(),
+                    onChanged: (String? newValue) {
+                      selecteddivision = newValue;
+                    }),
                 const SizedBox(
                   height: 15,
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    addStudent();
+                    if (formKey.currentState!.validate()) addStudent();
                     formKey.currentState!.reset();
 
                     Get.back();
