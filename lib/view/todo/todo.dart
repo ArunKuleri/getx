@@ -1,44 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/todo_controller/todo_controller.dart';
+
+import 'package:flutter_application_1/model/todo_model/todomodel.dart';
 import 'package:flutter_application_1/widgets/todo_action.dart';
-import 'package:get/get.dart';
 
-class TodoPage extends StatelessWidget {
+class TodoPage extends StatefulWidget {
+  TodoPage({Key? key}) : super(key: key);
+
+  @override
+  State<TodoPage> createState() => _TodoPageState();
+}
+
+class _TodoPageState extends State<TodoPage> {
   final TextEditingController _textFieldController = TextEditingController();
-  final TodoController todoContoller = Get.put(TodoController());
+  bool _isCompeleted = false;
+  final List<TodoModel> _task = [];
+  List<TodoModel> get allTask => _task;
+  void addTask(String task) {
+    setState(() {
+      _task.add(TodoModel(
+        todoTitle: task,
+        completed: false,
+      ));
+    });
+  }
 
-  TodoPage({super.key});
+  void toggleTask(TodoModel task) {
+    setState(() {
+      final taskIndex = _task.indexWhere((t) => t == task);
+      if (taskIndex != -1) {
+        _task[taskIndex].toggleCompleted();
+      }
+    });
+  }
+
+  void deleteTask(TodoModel task) {
+    setState(() {
+      _task.remove(task);
+    });
+  }
+
   void _showAddTextDialog() {
-    Get.defaultDialog(
-        title: "Add a new Task",
-        content: Column(
-          children: [
-            TextFormField(
-              autofocus: true,
-              controller: _textFieldController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "please enter a task";
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Add a new Task"),
+          content: Column(
+            children: [
+              TextFormField(
+                autofocus: true,
+                controller: _textFieldController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "please enter a task";
+                  }
+                  return null;
+                },
+                decoration: const InputDecoration(hintText: "Add New Task"),
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                if (_textFieldController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Validation Error: Please enter a task."),
+                    ),
+                  );
+                } else {
+                  _submit();
                 }
-                return null;
               },
-              decoration: const InputDecoration(hintText: "Add New Task"),
+              child: const Text("Submit"),
             ),
           ],
-        ),
-        textConfirm: "Submit",
-        onConfirm: () {
-          if (_textFieldController.text.isEmpty) {
-            Get.snackbar("Validation Error", "Please enter a task.");
-          } else {
-            _submit();
-          }
-        });
+        );
+      },
+    );
   }
 
   void _submit() {
-    todoContoller.addTask(_textFieldController.text);
-    Get.back();
+    setState(() {
+      addTask(_textFieldController.text);
+      _isCompeleted = false;
+    });
+    Navigator.of(context).pop(); // Use Navigator to close the dialog
     _textFieldController.clear();
   }
 

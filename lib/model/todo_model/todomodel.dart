@@ -6,6 +6,7 @@ class TodoModel {
   TodoModel({
     this.Completed = false,
     required this.todoTitle,
+    required bool completed,
   });
   void toggleCompleted() {
     Completed = !Completed;
